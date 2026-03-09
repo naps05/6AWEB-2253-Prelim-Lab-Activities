@@ -1,0 +1,121 @@
+<!-- Floating background particles -->
+<div class="particles">
+  <div class="particle" style="--x:5%;  --dur:8s;  --delay:0s"></div>
+  <div class="particle" style="--x:15%; --dur:11s; --delay:2s"></div>
+  <div class="particle" style="--x:25%; --dur:9s;  --delay:4s"></div>
+  <div class="particle" style="--x:35%; --dur:13s; --delay:1s"></div>
+  <div class="particle" style="--x:45%; --dur:7s;  --delay:3s"></div>
+  <div class="particle" style="--x:55%; --dur:10s; --delay:5s"></div>
+  <div class="particle" style="--x:65%; --dur:12s; --delay:0.5s"></div>
+  <div class="particle" style="--x:75%; --dur:8s;  --delay:2.5s"></div>
+  <div class="particle" style="--x:85%; --dur:14s; --delay:1.5s"></div>
+  <div class="particle" style="--x:95%; --dur:9s;  --delay:3.5s"></div>
+</div>
+
+<!-- Toasts -->
+<div class="toast-container">
+  @for (toast of toasts; track toast.id) {
+    <div class="toast" [ngClass]="toast.type">
+      {{ toast.type === 'success' ? '✓' : '✕' }}&nbsp;{{ toast.message }}
+    </div>
+  }
+</div>
+
+<!-- Delete confirmation modal -->
+@if (pendingDeleteId !== null) {
+  <div class="modal-backdrop" (click)="cancelDelete()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <p class="modal-title">Remove this book?</p>
+      <p class="modal-sub">This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" (click)="cancelDelete()">Cancel</button>
+        <button class="btn-confirm" (click)="confirmDeleteBook()">Yes, remove it</button>
+      </div>
+    </div>
+  </div>
+}
+
+<div class="page-content">
+  <p class="app-title">Books Application</p>
+
+  <!-- Floating form card -->
+  <div class="form-card">
+    <div class="form-card-bg"></div>
+    <p class="form-card-label">◆ Add new volume</p>
+    <div class="form-row">
+      <input [(ngModel)]="newTitle" placeholder="title" (keydown.enter)="addBook()">
+      <input [(ngModel)]="newDesc" placeholder="description" (keydown.enter)="addBook()">
+      <div class="price-wrapper">
+        <input [(ngModel)]="newPrice" placeholder="book price" type="number" (keydown.enter)="addBook()">
+        <div class="price-arrows">
+          <button class="price-arrow" (click)="newPrice = +newPrice + 1">▲</button>
+          <button class="price-arrow" (click)="newPrice = +newPrice - 1">▼</button>
+        </div>
+      </div>
+      <button class="btn-add" (click)="addBook()">+ Add book</button>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <input class="search-input" [(ngModel)]="searchQuery" placeholder="Search books...">
+    <div class="sort-buttons">
+      <span class="sort-label">Sort:</span>
+      <button class="btn-sort" [class.active]="sortField === 'title'" (click)="setSort('title')">
+        Title {{ sortField === 'title' ? (sortDir === 'asc' ? '↑' : '↓') : '' }}
+      </button>
+      <button class="btn-sort" [class.active]="sortField === 'price'" (click)="setSort('price')">
+        Price {{ sortField === 'price' ? (sortDir === 'asc' ? '↑' : '↓') : '' }}
+      </button>
+    </div>
+    <div class="total-counter">
+      Total: <span class="total-value">${{ totalPrice.toFixed(2) }}</span>
+      <span class="book-count">({{ books.length }} {{ books.length === 1 ? 'book' : 'books' }})</span>
+    </div>
+  </div>
+
+  <!-- Column headers -->
+  <div class="book-list-header">
+    <span>Title</span>
+    <span>Description</span>
+    <span>Price</span>
+    <span></span>
+  </div>
+
+  <!-- Book list -->
+  @for (book of filteredBooks; track book.id) {
+    <h3 class="book-row" [class.editing]="editingId === book.id">
+
+      @if (editingId === book.id) {
+        <input class="edit-input" [(ngModel)]="editTitle" placeholder="title">
+        <input class="edit-input" [(ngModel)]="editDesc" placeholder="description">
+        <div class="price-wrapper">
+          <input class="edit-input" [(ngModel)]="editPrice" type="number" placeholder="price">
+          <div class="price-arrows">
+            <button class="price-arrow" (click)="editPrice = +editPrice + 1">▲</button>
+            <button class="price-arrow" (click)="editPrice = +editPrice - 1">▼</button>
+          </div>
+        </div>
+        <div class="row-actions">
+          <button class="btn-save" (click)="saveEdit()">✓ Save</button>
+          <button class="btn-cancel-edit" (click)="cancelEdit()">✕</button>
+        </div>
+      } @else {
+        <b>{{ book.title }}</b>
+        <b>{{ book.desc }}</b>
+        <b>{{ book.price }}</b>
+        <div class="row-actions">
+          <button class="btn-edit" (click)="startEdit(book)">✎ Edit</button>
+          <button class="btn-delete" (click)="confirmDelete(book.id)">✕ Delete</button>
+        </div>
+      }
+
+    </h3>
+  } @empty {
+    <p class="empty-state">
+      {{ searchQuery ? 'No books match your search' : 'No books available' }}
+    </p>
+  }
+</div>
+
+<router-outlet />

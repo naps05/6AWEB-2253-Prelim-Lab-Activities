@@ -1,0 +1,392 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #080602;
+  font-family: 'Inconsolata', monospace;
+  color: #ede5d8;
+  position: relative;
+}
+
+app-root {
+  display: block;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+/* ══════════════════════════════════
+   AURORA LAYERS
+══════════════════════════════════ */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora-layer {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  border-radius: 40%;
+  opacity: 0.07;
+  mix-blend-mode: screen;
+}
+
+.aurora-1 {
+  background: radial-gradient(ellipse 60% 40% at 50% 50%,
+    rgba(200, 140, 30, 1) 0%,
+    rgba(180, 100, 20, 0.5) 40%,
+    transparent 70%);
+  top: -60%;
+  left: -30%;
+  animation: auroraFloat1 20s ease-in-out infinite alternate;
+}
+
+.aurora-2 {
+  background: radial-gradient(ellipse 50% 60% at 50% 50%,
+    rgba(160, 80, 200, 1) 0%,
+    rgba(100, 40, 160, 0.5) 40%,
+    transparent 70%);
+  top: -40%;
+  right: -40%;
+  animation: auroraFloat2 25s ease-in-out infinite alternate;
+  opacity: 0.05;
+}
+
+.aurora-3 {
+  background: radial-gradient(ellipse 70% 30% at 50% 50%,
+    rgba(220, 160, 40, 1) 0%,
+    rgba(200, 120, 20, 0.4) 50%,
+    transparent 70%);
+  bottom: -50%;
+  left: 10%;
+  animation: auroraFloat3 18s ease-in-out infinite alternate;
+  opacity: 0.06;
+}
+
+.aurora-4 {
+  background: radial-gradient(ellipse 40% 70% at 50% 50%,
+    rgba(80, 120, 200, 1) 0%,
+    rgba(40, 80, 160, 0.4) 40%,
+    transparent 70%);
+  bottom: -60%;
+  right: 0%;
+  animation: auroraFloat4 22s ease-in-out infinite alternate;
+  opacity: 0.04;
+}
+
+@keyframes auroraFloat1 {
+  0%   { transform: translate(0, 0)     rotate(0deg)   scale(1); }
+  33%  { transform: translate(80px, 60px)  rotate(15deg)  scale(1.1); }
+  66%  { transform: translate(-40px, 100px) rotate(-10deg) scale(0.95); }
+  100% { transform: translate(120px, -40px) rotate(20deg)  scale(1.2); }
+}
+
+@keyframes auroraFloat2 {
+  0%   { transform: translate(0, 0)      rotate(0deg)   scale(1); }
+  33%  { transform: translate(-100px, 80px) rotate(-20deg) scale(1.15); }
+  66%  { transform: translate(60px, -80px)  rotate(10deg)  scale(0.9); }
+  100% { transform: translate(-80px, -60px) rotate(-15deg) scale(1.1); }
+}
+
+@keyframes auroraFloat3 {
+  0%   { transform: translate(0, 0)     rotate(0deg)  scale(1); }
+  50%  { transform: translate(100px, -80px) rotate(25deg) scale(1.2); }
+  100% { transform: translate(-60px, 60px) rotate(-15deg) scale(0.9); }
+}
+
+@keyframes auroraFloat4 {
+  0%   { transform: translate(0, 0)      rotate(0deg)   scale(1); }
+  50%  { transform: translate(-80px, -100px) rotate(-20deg) scale(1.1); }
+  100% { transform: translate(100px, 60px)   rotate(15deg)  scale(0.95); }
+}
+
+/* ══════════════════════════════════
+   MOVING ORBS
+══════════════════════════════════ */
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+}
+
+.orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(210,150,30,0.22) 0%, transparent 70%);
+  top: -150px; left: -150px;
+  animation: orbPath1 24s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(160,90,20,0.18) 0%, transparent 70%);
+  bottom: -100px; right: -100px;
+  animation: orbPath2 28s ease-in-out infinite;
+}
+
+.orb-3 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(120,60,180,0.14) 0%, transparent 70%);
+  top: 35%; left: 55%;
+  animation: orbPath3 20s ease-in-out infinite;
+}
+
+.orb-4 {
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(200,130,20,0.16) 0%, transparent 70%);
+  top: 55%; left: 8%;
+  animation: orbPath4 22s ease-in-out infinite;
+}
+
+.orb-5 {
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(80,40,130,0.12) 0%, transparent 70%);
+  top: 15%; right: 12%;
+  animation: orbPath5 18s ease-in-out infinite;
+}
+
+.orb-6 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(190,120,10,0.1) 0%, transparent 70%);
+  top: 50%; left: 30%;
+  animation: orbPath6 32s ease-in-out infinite;
+}
+
+@keyframes orbPath1 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(150px, 80px); }
+  50%  { transform: translate(80px, 180px); }
+  75%  { transform: translate(-60px, 100px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes orbPath2 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-120px, -80px); }
+  50%  { transform: translate(-200px, -160px); }
+  75%  { transform: translate(-80px, -200px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes orbPath3 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-100px, 80px); }
+  50%  { transform: translate(-180px, -60px); }
+  75%  { transform: translate(60px, -100px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes orbPath4 {
+  0%   { transform: translate(0, 0); }
+  33%  { transform: translate(120px, -100px); }
+  66%  { transform: translate(200px, 60px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes orbPath5 {
+  0%   { transform: translate(0, 0); }
+  33%  { transform: translate(-80px, 120px); }
+  66%  { transform: translate(60px, 160px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes orbPath6 {
+  0%   { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(-150px, -100px) scale(1.2); }
+  50%  { transform: translate(100px, -200px) scale(0.8); }
+  75%  { transform: translate(200px, 100px) scale(1.1); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* ══════════════════════════════════
+   ROTATING SPOTLIGHTS
+══════════════════════════════════ */
+.spotlight {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: conic-gradient(
+    from 0deg at 50% 25%,
+    transparent 0deg,
+    rgba(210, 160, 40, 0.06) 20deg,
+    transparent 40deg,
+    transparent 180deg,
+    rgba(210, 160, 40, 0.04) 200deg,
+    transparent 220deg,
+    transparent 360deg
+  );
+  animation: rotateSlow 35s linear infinite;
+  transform-origin: 50% 25%;
+}
+
+.spotlight-2 {
+  background: conic-gradient(
+    from 0deg at 70% 60%,
+    transparent 0deg,
+    rgba(180, 100, 200, 0.04) 30deg,
+    transparent 60deg,
+    transparent 360deg
+  );
+  animation: rotateSlow 50s linear infinite reverse;
+  transform-origin: 70% 60%;
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ══════════════════════════════════
+   LIGHT STREAKS
+══════════════════════════════════ */
+.streaks {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.streak {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220,170,50,0.4), transparent);
+  border-radius: 50%;
+  animation: streakMove var(--dur) ease-in-out infinite;
+  opacity: 0;
+}
+
+.streak-1 {
+  width: 300px; top: 18%; left: -300px;
+  --dur: 8s;
+  animation: streakMove 8s ease-in-out 0s infinite;
+}
+.streak-2 {
+  width: 500px; top: 42%; left: -500px;
+  animation: streakMove 12s ease-in-out 3s infinite;
+}
+.streak-3 {
+  width: 200px; top: 65%; left: -200px;
+  animation: streakMove 9s ease-in-out 6s infinite;
+}
+.streak-4 {
+  width: 400px; top: 30%; left: -400px;
+  animation: streakMove 15s ease-in-out 1s infinite;
+}
+.streak-5 {
+  width: 250px; top: 78%; left: -250px;
+  animation: streakMove 10s ease-in-out 4s infinite;
+}
+
+@keyframes streakMove {
+  0%   { transform: translateX(0);        opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateX(120vw);    opacity: 0; }
+}
+
+/* ══════════════════════════════════
+   FIREFLIES
+══════════════════════════════════ */
+.fireflies {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.firefly {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(230, 180, 60, 0.9);
+  box-shadow: 0 0 8px 3px rgba(220, 170, 50, 0.5);
+  left: var(--x);
+  top: var(--y);
+  animation:
+    fireflyMove var(--dur) ease-in-out infinite alternate,
+    fireflyFade var(--dur2) ease-in-out infinite;
+}
+
+@keyframes fireflyMove {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(var(--mx), var(--my)); }
+}
+
+@keyframes fireflyFade {
+  0%, 100% { opacity: 0; box-shadow: 0 0 4px 1px rgba(220,170,50,0.2); }
+  50%       { opacity: 1; box-shadow: 0 0 12px 4px rgba(220,170,50,0.7); }
+}
+
+/* ══════════════════════════════════
+   FLOATING DUST
+══════════════════════════════════ */
+.dust {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.dust-p {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  background: rgba(210, 170, 80, 0.5);
+  border-radius: 50%;
+  left: var(--x);
+  bottom: -10px;
+  animation: dustFloat var(--dur) ease-in-out var(--delay) infinite;
+}
+
+@keyframes dustFloat {
+  0%   { transform: translateY(0) translateX(0);    opacity: 0; }
+  10%  { opacity: 0.6; }
+  50%  { transform: translateY(-50vh) translateX(30px); opacity: 0.3; }
+  90%  { opacity: 0.1; }
+  100% { transform: translateY(-100vh) translateX(-20px); opacity: 0; }
+}
+
+/* ══════════════════════════════════
+   SHELF LINES
+══════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 119px,
+      rgba(180, 140, 60, 0.03) 119px,
+      rgba(180, 140, 60, 0.03) 120px
+    );
+}
